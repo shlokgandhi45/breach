@@ -60,4 +60,4 @@ src/
 - **Primary**: `#2563EB`
 - **Text**: `#111827`
 - **Secondary text**: `#6B7280`
-- **Font**: DM Sans (body), DM Mono (numbers/scores)
+- **Font**: DM Sans (body), DM Mono (numbers/scores).
