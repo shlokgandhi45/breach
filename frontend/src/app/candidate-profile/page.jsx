@@ -14,7 +14,7 @@ import MatchScore from '@/components/ui/MatchScore';
 import StatusBadge from '@/components/ui/StatusBadge';
 import SkillTag from '@/components/ui/SkillTag';
 import { getSourceIcon } from '@/lib/utils';
-import { fetchCandidateById } from '@/lib/candidateService';
+import { fetchCandidateById, scheduleInterview } from '@/lib/candidateService';
 import CultureFitPanel from '@/components/intelligence/CultureFitPanel';
 import SkillGapPanel from '@/components/intelligence/SkillGapPanel';
 import OutreachPanel from '@/components/intelligence/OutreachPanel';
@@ -44,6 +44,27 @@ function ProfileContent() {
     const [candidate, setCandidate] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('Overview');
+    const [isScheduling, setIsScheduling] = useState(false);
+
+    const handleSchedule = async () => {
+        if (!candidate || isScheduling) return;
+        setIsScheduling(true);
+        try {
+            const res = await scheduleInterview(candidate.id);
+            if (res.success) {
+                alert(res.message);
+                // Refresh candidate data to show stage change
+                const updated = await fetchCandidateById(candidate.id);
+                if (updated) setCandidate(updated);
+            } else {
+                alert("Scheduling failed: " + (res.error || "Unknown error"));
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setIsScheduling(false);
+        }
+    };
     const [note, setNote] = useState('');
 
     useEffect(() => {
@@ -122,7 +143,13 @@ function ProfileContent() {
 
                         <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 mt-8">
                             <Link href="/compare"><button className="btn-secondary !text-[13px] px-5 py-2.5 rounded-xl border-[#E5E7EB] hover:bg-white shadow-sm transition-all">Compare</button></Link>
-                            <button className="btn-primary !text-[13px] px-6 py-2.5 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">Schedule Interview</button>
+                            <button 
+                                onClick={handleSchedule}
+                                disabled={isScheduling}
+                                className="btn-primary !text-[13px] px-6 py-2.5 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {isScheduling ? 'Scheduling...' : 'Schedule Interview'}
+                            </button>
                         </div>
                     </div>
 

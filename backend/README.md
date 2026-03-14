@@ -70,5 +70,5 @@ python scripts/bulk_ingest.py --folder ./dataset/resumes --source linkedin
 - Clone this folder
 - Set DATABASE_URL to point at the shared PostgreSQL instance
 - Run bulk_ingest.py — all writes are idempotent (duplicate emails skip gracefully)
-- The `/api/ingest` endpoint is callable from any other service via HTTP.
+- The `/api/ingest` endpoint is callable from any other service via HTTP
 

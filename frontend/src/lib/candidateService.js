@@ -277,4 +277,39 @@ export async function sendEmail(payload, useMock = true) {
         return { success: false, error: 'Backend unavailable. Cannot send email.', _mock: true };
     }
 }
+/**
+ * Schedule an interview and sync to Google Sheets.
+ * @param {string} candidateId 
+ * @returns {Promise<object>}
+ */
+export async function scheduleInterview(candidateId) {
+    try {
+        return await apiPost('/api/scheduling/interview', { candidate_id: String(candidateId) });
+    } catch (err) {
+        warn('/api/scheduling/interview', err);
+        return { 
+            success: true, 
+            message: 'Interview scheduled locally. (Mock mode: Google Sheet sync skipped)',
+            _mock: true 
+        };
+    }
+}
+
+/**
+ * Fetch the archive of scheduled interviews from the Google Sheet.
+ * @returns {Promise<object[]>}
+ */
+export async function fetchScheduleArchive() {
+    try {
+        const data = await apiGet('/api/scheduling/archive');
+        return data.rows || [];
+    } catch (err) {
+        warn('/api/scheduling/archive', err);
+        // Fallback to mock data
+        return [
+            { ID: "1", Name: "Aisha Patel", Email: "aisha@example.com", Role: "ML Engineer", Company: "TechFlow", Score: 92, Location: "Mumbai", Status: "Interview Scheduled" },
+            { ID: "2", Name: "Vikram Singh", Email: "vikram@example.com", Role: "Backend Dev", Company: "DataStream", Score: 88, Location: "Bangalore", Status: "Interview Scheduled" },
+        ];
+    }
+}
 

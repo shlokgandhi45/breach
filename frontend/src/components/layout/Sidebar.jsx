@@ -12,6 +12,7 @@ const navItems = [
     { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     { label: 'Candidates', href: '/candidates', icon: Users, badge: '47' },
     { label: 'Pipeline', href: '/pipeline', icon: GitBranch },
+    { label: 'Interviews', href: '/scheduling', icon: Sparkles },
     { label: 'Compare', href: '/compare', icon: BarChart2 },
     { label: 'Applicant List', href: '/referrals', icon: UserPlus, badge: '3' },
     { label: 'Settings', href: '/settings', icon: Settings },

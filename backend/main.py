@@ -20,6 +20,7 @@ from routes.intelligence import router as intelligence_router
 from routes.candidates_route import router as candidates_router
 from routes.dashboard_route import router as dashboard_router
 from routes.pipeline_route import router as pipeline_router
+from routes.scheduling_route import router as scheduling_router
 
 logging.basicConfig(level=logging.INFO)
 
@@ -36,11 +37,14 @@ app.add_middleware(
     allow_headers  = ["*"],
 )
 
-# Auto-create tables on startup (safe to run repeatedly — won't drop existing data)
+# Auto-create tables on startup (gracefully handle failures if DB is offline)
 @app.on_event("startup")
 def startup():
-    Base.metadata.create_all(engine)
-    logging.getLogger(__name__).info("DB tables verified on startup.")
+    try:
+        Base.metadata.create_all(engine)
+        logging.getLogger(__name__).info("DB tables verified on startup.")
+    except Exception as e:
+        logging.getLogger(__name__).warning(f"DB connection failed on startup: {e}. Services will use mock fallbacks.")
 
 # ── Register all route modules ────────────────────────────────────────────────
 app.include_router(ingest_router)         # /api/ingest/*
@@ -49,6 +53,7 @@ app.include_router(intelligence_router)   # /api/intelligence/*
 app.include_router(candidates_router)     # /api/candidates/*
 app.include_router(dashboard_router)      # /api/dashboard/*
 app.include_router(pipeline_router)       # /api/pipeline/*
+app.include_router(scheduling_router)     # /api/scheduling/*
 
 @app.get("/")
 def root():
