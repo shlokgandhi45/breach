@@ -156,8 +156,12 @@ ALTURA is built around two interconnected pipelines:
          └────────────────────────────────┘
 ```
 
+
 ---
 
+<p align="center">
+  <img src="C:\Users\admin\Downloads\Praufl_Architechture.png" width="800" />
+</p>
 ## 🛠️ Tech Stack
 
 | Layer | Technology | Purpose |
