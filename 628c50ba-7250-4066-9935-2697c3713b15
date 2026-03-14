@@ -1,0 +1,84 @@
+﻿ID,Name,Email,Role,Company,Location,Score,Status
+fd207644-0c9e-4f73-8133-b2ae98e13164,Vanya Sharma,mock_candidate_52_d899@example.com,Software Engineer,Microsoft,"Delhi, India",79,Interview Scheduled
+fafebf97-f4ae-4aa4-b8bb-524a40d929cc,Avni Kapoor,mock_candidate_34_3574@example.com,Mobile Developer,Microsoft,Remote,91,Interview Scheduled
+f651bf02-98bb-4b9c-9d58-871585557f99,Ananya Das,mock_candidate_10_9a3f@example.com,DevOps Engineer,TCS,"Mumbai, India",79,Interview Scheduled
+f562fb12-7356-4ebf-8efc-b38aec87c0b3,Sai Das,mock_candidate_27_c719@example.com,DevOps Engineer,Wipro,"Delhi, India",91,Interview Scheduled
+f108a2a4-b681-4833-8074-e13564fcd6e8,Arjun Sharma,mock_candidate_75_25b3@example.com,Data Scientist,Google,"Hyderabad, India",91,Interview Scheduled
+f0985d2d-28ec-42bc-947b-3802681fb023,Sai Verma,mock_candidate_54_3636@example.com,ML Engineer,Google,"Hyderabad, India",71,Interview Scheduled
+ef5453bf-f04a-4dbb-8b6c-0cb658c30a71,Vihaan Khan,mock_candidate_3_d5de@example.com,Backend Developer,Ola,"Mumbai, India",84,Interview Scheduled
+eb5d7ce0-a552-4f4b-a40a-884fd554c3c1,Ishaan Khan,mock_candidate_94_7960@example.com,Data Scientist,Wipro,"Bangalore, India",72,Interview Scheduled
+eaf7197f-d91d-4423-be03-5bb0df30f046,Riya Patel,mock_candidate_36_8f50@example.com,Software Engineer,Infosys,"Mumbai, India",84,Interview Scheduled
+e967f155-a654-461c-87e0-73a3bbcbad34,Ananya Singh,mock_candidate_52_4e28@example.com,Backend Developer,Flipkart,"Hyderabad, India",78,Interview Scheduled
+e2f0b5a2-01f4-4b65-bd95-94ef6a364fce,Kiara Bose,mock_candidate_48_8bc2@example.com,Frontend Developer,Amazon,"Pune, India",83,Interview Scheduled
+e1baec7d-e176-417b-8871-6eceb5087005,Sai Khan,mock_candidate_20_c189@example.com,Product Manager,Infosys,"Chennai, India",81,Interview Scheduled
+e058d275-7bd1-434d-bc60-7f86ad508d53,Sanya Malhotra,mock_candidate_30_15ff@example.com,Backend Developer,Razorpay,"Noida, India",78,Interview Scheduled
+d1a199c1-e665-48aa-971d-60101dec5472,Avni Gupta,mock_candidate_47_eb02@example.com,DevOps Engineer,Google,"Gurgaon, India",87,Interview Scheduled
+d0dfa18a-fc85-4317-a0ae-3bd7170402e3,Aryan Choudhury,mock_candidate_95_e911@example.com,Mobile Developer,Meta,"Delhi, India",79,Interview Scheduled
+ce92d57f-b121-44cc-87d7-0aa074e26248,Aarav Das,mock_candidate_51_7846@example.com,Data Scientist,Flipkart,"Gurgaon, India",83,Interview Scheduled
+cce0d588-d5dd-45f4-bdea-e09a5d12e073,Avni Reddy,mock_candidate_68_7e06@example.com,Mobile Developer,Zomato,"Chennai, India",56,Interview Scheduled
+c915112e-6b79-43c2-880b-87584f323e5f,Kiara Patel,mock_candidate_87_71a2@example.com,Mobile Developer,CRED,"Noida, India",85,Interview Scheduled
+c5eff3d2-4878-463d-a96d-639d9af2c7bd,Sai Verma,mock_candidate_1_69ed@example.com,Product Manager,CRED,"Chennai, India",89,Interview Scheduled
+be74b5b8-95a1-49f3-8e33-7a28e756c353,Vihaan Joshi,mock_candidate_97_9bf2@example.com,Data Scientist,Paytm,"Bangalore, India",70,Interview Scheduled
+bcf7b433-e7b7-4f23-b937-618d43a65d27,Riya Kapoor,mock_candidate_32_e0f9@example.com,Mobile Developer,Infosys,"Delhi, India",84,Interview Scheduled
+bbbb7d50-a84f-467b-8c2f-415f1776b454,Kabir Das,mock_candidate_50_a880@example.com,Fullstack Engineer,Infosys,"Hyderabad, India",82,Interview Scheduled
+bbbb4f3c-06e4-482a-b4ff-728d1a0b26dd,Avni Pillai,mock_candidate_79_df3a@example.com,ML Engineer,Flipkart,"Delhi, India",74,Interview Scheduled
+b307f9cb-103f-4ee5-b200-4a515238391b,Kabir Nair,mock_candidate_96_f131@example.com,Data Scientist,Paytm,"Hyderabad, India",51,Interview Scheduled
+b295f308-c0f4-435c-a4b2-9ca97a7a0dfe,Aryan Nair,mock_candidate_10_256b@example.com,Data Scientist,Google,"Mumbai, India",77,Interview Scheduled
+b2702065-541d-43d7-be8e-fbf61f808c86,Isha Kapoor,mock_candidate_56_72bf@example.com,Mobile Developer,Swiggy,"Noida, India",91,Interview Scheduled
+b0143bf3-2c2b-4c35-9932-ca93eff12f44,Vanya Verma,mock_candidate_70_99cd@example.com,Frontend Developer,TCS,"Hyderabad, India",61,Interview Scheduled
+aacadba7-1127-4c56-8fbd-cf8fc8dfc720,Avni Patel,mock_candidate_56_7201@example.com,Mobile Developer,Wipro,"Mumbai, India",86,Interview Scheduled
+a7928ed6-2cc0-4d21-85df-b2e4849b58da,Arjun Malhotra,mock_candidate_73_dece@example.com,Software Engineer,Ola,"Chennai, India",78,Interview Scheduled
+a6284c35-856e-4999-b99c-8a2ed8c77cf8,Vihaan Reddy,mock_candidate_62_8434@example.com,Software Engineer,Paytm,"Bangalore, India",81,Interview Scheduled
+9f3810c0-fa1d-44ea-a21a-8ae96e789c11,Aarav Verma,mock_candidate_93_a2b8@example.com,Product Manager,Microsoft,"Mumbai, India",91,Interview Scheduled
+9a274072-89a5-4034-afbf-9e422c8310bd,Aryan Das,mock_candidate_59_8709@example.com,Fullstack Engineer,Flipkart,"Gurgaon, India",94,Interview Scheduled
+975ee5bd-dd54-42c5-a6ab-faf01e4056d5,Vihaan Nair,mock_candidate_18_857a@example.com,Product Manager,Flipkart,"Mumbai, India",83,Interview Scheduled
+96cb1359-50b7-48ec-aeda-e3dbebdb5867,Vihaan Reddy,mock_candidate_48_6d2c@example.com,Data Scientist,Razorpay,Remote,81,Interview Scheduled
+922a5a10-96f6-41d2-84bb-9c30fd23faf2,Vihaan Singh,mock_candidate_60_71dd@example.com,Backend Developer,Zomato,"Chennai, India",76,Interview Scheduled
+901bf2fa-3e6b-4bbf-987f-aa6f15d783f7,Kiara Singh,mock_candidate_58_c7bf@example.com,Software Engineer,Infosys,"Hyderabad, India",61,Interview Scheduled
+8cd5040b-00ff-44bd-9a87-0369f600339f,Rohan Joshi,mock_candidate_99_5a16@example.com,Mobile Developer,CRED,"Bangalore, India",88,Interview Scheduled
+8a0c84e0-3c58-4d95-b556-84574481316b,Rohan Das,mock_candidate_13_dd2e@example.com,Product Manager,Wipro,"Mumbai, India",92,Interview Scheduled
+886bc894-ce0f-4d97-bf1e-5f160077a234,Isha Choudhury,mock_candidate_65_0cb6@example.com,Software Engineer,Razorpay,Remote,80,Interview Scheduled
+862b7d01-60b1-4f92-8416-8e4877c45e3a,Aryan Gupta,mock_candidate_83_c38c@example.com,Backend Developer,Razorpay,"Gurgaon, India",62,Interview Scheduled
+821aee06-55a6-4bc1-878f-faff03f9958e,Vanya Sharma,mock_candidate_64_10f3@example.com,DevOps Engineer,Zomato,"Noida, India",79,Interview Scheduled
+7f60de06-d86a-4ff5-8203-ddf7ad2b0b2c,Ishaan Sharma,mock_candidate_6_633d@example.com,DevOps Engineer,Meta,"Mumbai, India",81,Interview Scheduled
+7906697b-218b-4257-b11c-80100f651837,Riya Patel,mock_candidate_77_70b2@example.com,Product Manager,Paytm,"Bangalore, India",72,Interview Scheduled
+772312ef-31c0-4480-beb6-c53bf66e144e,Ananya Joshi,mock_candidate_57_b418@example.com,Product Manager,Infosys,Remote,79,Interview Scheduled
+70427c8e-9a29-4037-b8ab-82b0b6f1ce34,Kabir Khan,mock_candidate_30_069a@example.com,ML Engineer,Microsoft,"Mumbai, India",73,Interview Scheduled
+6fdf0acb-680f-4b4c-98c9-3b01ebf5834d,Aarav Iyengar,mock_candidate_44_d0a3@example.com,Frontend Developer,Infosys,"Gurgaon, India",95,Interview Scheduled
+6a7177e9-ff0c-4a8a-941c-50ee1f0d5b14,Kiara Nair,mock_candidate_99_6ddc@example.com,Software Engineer,TCS,Remote,79,Interview Scheduled
+6843722b-a187-4567-b5e4-dbf1fb29d4df,Riya Khan,mock_candidate_2_516e@example.com,Product Manager,Paytm,"Delhi, India",87,Interview Scheduled
+67307798-bc4f-4caa-bb8d-584683c6edd8,Sanya Kapoor,mock_candidate_78_3f09@example.com,Backend Developer,Ola,"Mumbai, India",65,Interview Scheduled
+61b78e4b-42da-41e3-8e77-6e14fdc488d5,Sanya Gupta,mock_candidate_26_a240@example.com,Data Scientist,CRED,"Delhi, India",87,Interview Scheduled
+60983227-7e5f-4ea6-9f23-331737342429,Vanya Reddy,mock_candidate_5_c01f@example.com,Frontend Developer,Razorpay,"Mumbai, India",71,Interview Scheduled
+5f05f183-6e96-4aa9-a5aa-08c84400da3d,Rohan Pillai,mock_candidate_71_67cb@example.com,Frontend Developer,Swiggy,"Hyderabad, India",83,Interview Scheduled
+5a883fa5-b6dd-496e-a395-e8ac3d4c2947,Vanya Kapoor,mock_candidate_77_90b6@example.com,Data Scientist,Microsoft,"Chennai, India",90,Interview Scheduled
+5a271073-15ac-4282-a363-18ca7ce4f459,Avni Reddy,mock_candidate_90_634e@example.com,Data Scientist,Meta,"Chennai, India",80,Interview Scheduled
+5996654c-b22a-4235-ada9-27c15397f199,Kiara Bose,mock_candidate_21_faa0@example.com,Fullstack Engineer,Swiggy,"Gurgaon, India",83,Interview Scheduled
+5899a62f-2020-4771-9527-41bd8fb7176a,Ishaan Pillai,mock_candidate_7_25bf@example.com,Software Engineer,Flipkart,"Mumbai, India",71,Interview Scheduled
+569cea7c-00c7-4b00-a470-563831753ab4,Rohan Nair,mock_candidate_25_4038@example.com,Data Scientist,Infosys,Remote,76,Interview Scheduled
+4de5aef1-0135-43cc-bd0e-b35d2b16b7ea,Avni Malhotra,mock_candidate_98_cbdf@example.com,Software Engineer,Paytm,"Hyderabad, India",65,Interview Scheduled
+4b7741dc-773c-4f4f-bb1c-0759d17afa73,Vihaan Patel,mock_candidate_62_d8a1@example.com,DevOps Engineer,Amazon,"Delhi, India",80,Interview Scheduled
+467c49dd-39b6-482f-b83e-13f1158cd104,Aarav Joshi,mock_candidate_57_9d72@example.com,Fullstack Engineer,Flipkart,"Delhi, India",67,Interview Scheduled
+463b9eef-e75b-4457-b865-2bea21737470,Vanya Nair,mock_candidate_93_5518@example.com,Frontend Developer,Infosys,Remote,64,Interview Scheduled
+41b33f65-9705-40bf-8585-178be57b1552,Sai Malhotra,mock_candidate_64_64e5@example.com,DevOps Engineer,Amazon,"Noida, India",65,Interview Scheduled
+40064597-c7d7-4d2c-8469-a09a3d8860b0,Riya Nair,mock_candidate_77_c685@example.com,Frontend Developer,Flipkart,"Chennai, India",72,Interview Scheduled
+3cba5602-fa51-479a-99c6-fca2a73d6d6d,Kabir Patel,mock_candidate_45_979f@example.com,Fullstack Engineer,Paytm,"Chennai, India",74,Interview Scheduled
+3c6876b0-bf72-4553-bbe8-79322e02dc05,Sanya Das,mock_candidate_31_2e30@example.com,Product Manager,Razorpay,Remote,88,Interview Scheduled
+3790beed-61bb-4fc2-9425-e3bfb3195fe0,Kabir Nair,mock_candidate_45_12bc@example.com,Mobile Developer,Zomato,Remote,75,Interview Scheduled
+3366bccf-4b08-4117-9c2b-4eba26cb37e7,Rohan Choudhury,mock_candidate_4_bc25@example.com,Software Engineer,Infosys,"Bangalore, India",84,Interview Scheduled
+31e948c1-c478-4292-8d23-ddaa71006d3d,Vihaan Das,mock_candidate_12_8cc2@example.com,Backend Developer,Infosys,"Gurgaon, India",95,Interview Scheduled
+31c1553c-9308-4a8d-a38a-569c9f19db7f,Aarav Sharma,mock_candidate_42_c13c@example.com,Frontend Developer,Swiggy,Remote,95,Interview Scheduled
+314139b9-2ac8-47da-87c7-a2b63a12fb4e,Kiara Kapoor,mock_candidate_74_823c@example.com,Frontend Developer,Google,"Noida, India",75,Interview Scheduled
+2fca1010-a44f-4d93-9be0-fe308b180564,Ishaan Khan,mock_candidate_21_4332@example.com,Mobile Developer,Microsoft,"Gurgaon, India",84,Interview Scheduled
+2f92d5f2-c4ce-40cc-8da9-524e0a00d7d3,Aryan Bose,mock_candidate_82_c1df@example.com,DevOps Engineer,Infosys,"Mumbai, India",90,Interview Scheduled
+297a1b13-b979-44cb-8ac8-1b4baa8075b8,Isha Nair,mock_candidate_47_39f5@example.com,Backend Developer,Ola,"Delhi, India",93,Interview Scheduled
+287ac287-8225-4209-b141-33896682216c,Ananya Sharma,mock_candidate_66_5f8b@example.com,ML Engineer,Ola,"Noida, India",87,Interview Scheduled
+25ee8905-f701-45d8-9e3e-c1b9e34f80df,Kiara Bose,mock_candidate_61_6887@example.com,DevOps Engineer,Microsoft,"Noida, India",71,Interview Scheduled
+235f4e36-d219-42da-b0ce-7c579747d87e,Arjun Choudhury,mock_candidate_81_8cd5@example.com,DevOps Engineer,Amazon,"Mumbai, India",95,Interview Scheduled
+1c7bbd81-7125-43b9-a541-a2be081c7cf8,Aryan Pillai,mock_candidate_19_6bb3@example.com,ML Engineer,CRED,"Bangalore, India",62,Interview Scheduled
+1b1addcc-709d-421e-941f-bc529e90673c,Isha Das,mock_candidate_25_c173@example.com,Mobile Developer,Ola,"Pune, India",81,Interview Scheduled
+14498c67-0d92-4bc6-b3cc-15cb9d7c7cdb,Sai Kapoor,mock_candidate_43_9683@example.com,Mobile Developer,Flipkart,"Mumbai, India",79,Interview Scheduled
+0f5b3986-9799-436b-9365-e414f4ffe3f4,Riya Sharma,mock_candidate_16_fd04@example.com,Software Engineer,Amazon,"Pune, India",79,Interview Scheduled
+0b9b8440-a211-4853-80e5-a155926825ef,Aryan Choudhury,mock_candidate_33_5222@example.com,Mobile Developer,CRED,"Mumbai, India",79,Interview Scheduled
+041ac3b4-d81c-48b0-ad33-81623d7464ee,Ishaan Iyengar,mock_candidate_73_f622@example.com,Software Engineer,Razorpay,"Gurgaon, India",82,Interview Scheduled
+0161e532-87eb-445b-89e6-087c817755ad,Aryan Sharma,mock_candidate_78_2a2f@example.com,Frontend Developer,Razorpay,"Noida, India",88,Interview Scheduled

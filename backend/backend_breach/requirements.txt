@@ -1,0 +1,27 @@
+# Core
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+pydantic==2.8.2
+python-dotenv==1.0.1
+
+# Database
+sqlalchemy==2.0.35
+psycopg2-binary==2.9.9
+pgvector==0.3.2
+
+# PDF extraction
+pymupdf==1.24.10
+
+# LLM
+openai==1.47.0
+
+# Embeddings (local mode)
+sentence-transformers==3.1.1
+torch==2.4.1         # CPU build — remove and reinstall with CUDA if GPU available
+
+# File storage (S3 mode — optional)
+boto3==1.35.21
+
+# CLI utilities
+tqdm==4.66.5

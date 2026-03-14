@@ -1,0 +1,7 @@
+remote: error: Trace: 94db9a84a7af74992173440d367166dac81b482f4c88aaf2dc36defd73fb05f2        
+remote: error: See https://gh.io/lfs for more information.        
+remote: error: File frontend_breach.zip is 210.34 MB; this exceeds GitHub's file size limit of 100.00 MB        
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To https://github.com/shlokgandhi45/breach.git
+ ! [remote rejected] ridham -> ridham (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/shlokgandhi45/breach.git'

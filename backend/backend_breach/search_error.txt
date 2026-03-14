@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "C:\Users\91898\Documents\ML Playlist\Breach_PDEU\backend_breach\services\search_orchestrator.py", line 142, in run_search
+    final_score = _compute_final_score(
+        rrf_score        = rrf_score,
+    ...<5 lines>...
+        confidence       = summary.get("confidence", "low"),
+    )
+  File "C:\Users\91898\Documents\ML Playlist\Breach_PDEU\backend_breach\services\search_orchestrator.py", line 216, in _compute_final_score
+    active_weight_sum = BM25_WEIGHT # BM25 is always active (standard or fallback)
+                        ^^^^^^^^^^^
+NameError: name 'BM25_WEIGHT' is not defined
