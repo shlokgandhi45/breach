@@ -1,20 +1,37 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AppShell from '@/components/layout/AppShell';
 import Avatar from '@/components/ui/Avatar';
 import MatchScore from '@/components/ui/MatchScore';
 import StatusBadge from '@/components/ui/StatusBadge';
 import SkillTag from '@/components/ui/SkillTag';
-import { candidates } from '@/data/candidates';
 import { Plus, X, Sparkles } from 'lucide-react';
+import { fetchCandidates } from '@/lib/candidateService';
 
 export default function ComparePage() {
-    const [selected, setSelected] = useState([candidates[0], candidates[1]]);
+    const [allCandidates, setAllCandidates] = useState([]);
+    const [selected, setSelected] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        let cancelled = false;
+        async function load() {
+            setLoading(true);
+            const data = await fetchCandidates();
+            if (!cancelled) {
+                setAllCandidates(data);
+                setSelected([data[0], data[1]].filter(Boolean));
+                setLoading(false);
+            }
+        }
+        load();
+        return () => { cancelled = true; };
+    }, []);
 
     const fields = [
         { label: 'Current Company', key: 'currentCompany' },
-        { label: 'Experience', key: c => `${c.experienceYears} years` },
+        { label: 'Experience', key: c => `${c.experienceYears || 0} years` },
         { label: 'Location', key: 'location' },
         { label: 'Education', key: 'education' },
         { label: 'Expected Salary', key: 'salary' },
@@ -23,7 +40,21 @@ export default function ComparePage() {
         { label: 'Applied', key: 'appliedDate' },
     ];
 
-    const getValue = (c, key) => typeof key === 'function' ? key(c) : c[key];
+    const getValue = (c, key) => {
+        const val = typeof key === 'function' ? key(c) : c[key];
+        return val || '—';
+    };
+
+    if (loading) {
+        return (
+            <AppShell title="Compare" subtitle="Loading…">
+                <div className="section-card p-12 text-center">
+                    <div className="inline-block w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin mb-3" />
+                    <p className="text-[13px] text-[#9CA3AF]">Loading candidates…</p>
+                </div>
+            </AppShell>
+        );
+    }
 
     return (
         <AppShell title="Compare" subtitle="Side-by-side candidate comparison">
@@ -51,14 +82,14 @@ export default function ComparePage() {
                                     <select
                                         className="input-field !py-1 !text-[12px]"
                                         onChange={e => {
-                                            const id = parseInt(e.target.value);
-                                            const candidate = candidates.find(c => c.id === id);
+                                            const cid = e.target.value;
+                                            const candidate = allCandidates.find(c => String(c.id) === String(cid));
                                             if (candidate) setSelected(p => { const n = [...p]; n[i] = candidate; return n; });
                                         }}
                                         defaultValue=""
                                     >
                                         <option value="" disabled>+ Add candidate</option>
-                                        {candidates.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                                        {allCandidates.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                                     </select>
                                 </div>
                             )}
@@ -96,7 +127,7 @@ export default function ComparePage() {
                     {selected.map(c => (
                         <div key={c.id} className="px-4 py-3 border-b border-[#F3F4F6] border-l border-l-[#F3F4F6]">
                             <div className="flex flex-wrap gap-1">
-                                {c.skills.slice(0, 3).map(s => <SkillTag key={s} skill={s} />)}
+                                {(c.skills || []).slice(0, 3).map(s => <SkillTag key={s} skill={s} />)}
                             </div>
                         </div>
                     ))}
@@ -105,7 +136,7 @@ export default function ComparePage() {
 
             {/* Best Match Highlight */}
             {selected.length > 0 && (() => {
-                const best = [...selected].sort((a, b) => b.matchScore - a.matchScore)[0];
+                const best = [...selected].sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0))[0];
                 return (
                     <div className="mt-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <div className="flex items-center gap-2 mb-4 ml-1">
@@ -114,7 +145,6 @@ export default function ComparePage() {
                         </div>
 
                         <div className="relative group">
-                            {/* Decorative gradient background */}
                             <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-violet-200/20 to-primary/20 rounded-[28px] blur-sm opacity-50 group-hover:opacity-100 transition duration-1000"></div>
 
                             <div className="relative section-card !bg-white/80 backdrop-blur-md p-8 border-primary/20 shadow-lg shadow-primary/5">
@@ -144,11 +174,11 @@ export default function ComparePage() {
                                         </div>
 
                                         <div className="mt-6 flex flex-wrap gap-2 justify-center md:justify-start">
-                                            {best.skills.map(s => <SkillTag key={s} skill={s} variant="blue" />)}
+                                            {(best.skills || []).map(s => <SkillTag key={s} skill={s} variant="blue" />)}
                                         </div>
 
                                         <p className="mt-6 text-[14px] text-[#4B5563] leading-relaxed max-w-[600px] font-medium">
-                                            {best.name} is the strongest candidate in this comparison due to their high technical proficiency in <span className="text-primary">{best.skills[0]}</span> and direct industry experience at <span className="text-primary">{best.currentCompany}</span>. They align most closely with the core requirements of this role.
+                                            {best.name} is the strongest candidate in this comparison due to their high technical proficiency in <span className="text-primary">{(best.skills || [])[0] || 'their domain'}</span> and direct industry experience at <span className="text-primary">{best.currentCompany || 'their company'}</span>. They align most closely with the core requirements of this role.
                                         </p>
                                     </div>
                                 </div>

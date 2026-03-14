@@ -1,5 +1,5 @@
 'use client';
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -13,13 +13,19 @@ import Avatar from '@/components/ui/Avatar';
 import MatchScore from '@/components/ui/MatchScore';
 import StatusBadge from '@/components/ui/StatusBadge';
 import SkillTag from '@/components/ui/SkillTag';
-import { candidates } from '@/data/candidates';
 import { getSourceIcon } from '@/lib/utils';
+import { fetchCandidateById } from '@/lib/candidateService';
+import CultureFitPanel from '@/components/intelligence/CultureFitPanel';
+import SkillGapPanel from '@/components/intelligence/SkillGapPanel';
+import OutreachPanel from '@/components/intelligence/OutreachPanel';
 
 const tabs = [
     { id: 'Overview', icon: FileText },
     { id: 'Experience', icon: History },
     { id: 'Skills', icon: Sparkles },
+    { id: 'Culture Fit', icon: Star },
+    { id: 'Skill Gaps', icon: GraduationCap },
+    { id: 'Outreach', icon: Mail },
     { id: 'Resume', icon: FileText },
     { id: 'Activity', icon: Clock },
 ];
@@ -33,10 +39,39 @@ function timelineIcon(type) {
 
 function ProfileContent() {
     const params = useSearchParams();
-    const id = parseInt(params.get('id') || '1');
-    const candidate = candidates.find(c => c.id === id) || candidates[0];
+    const id = params.get('id') || '1';
+
+    const [candidate, setCandidate] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('Overview');
     const [note, setNote] = useState('');
+
+    useEffect(() => {
+        let cancelled = false;
+        async function load() {
+            setLoading(true);
+            const data = await fetchCandidateById(id);
+            if (!cancelled) {
+                setCandidate(data);
+                setLoading(false);
+            }
+        }
+        load();
+        return () => { cancelled = true; };
+    }, [id]);
+
+    if (loading || !candidate) {
+        return (
+            <AppShell title="Candidate Profile" subtitle="Loading…">
+                <div className="max-w-[960px] mx-auto px-4 pb-12">
+                    <div className="section-card p-12 text-center">
+                        <div className="inline-block w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin mb-3" />
+                        <p className="text-[13px] text-[#9CA3AF]">Loading profile…</p>
+                    </div>
+                </div>
+            </AppShell>
+        );
+    }
 
     return (
         <AppShell title="Candidate Profile" subtitle={candidate.name}>
@@ -123,7 +158,7 @@ function ProfileContent() {
                                     </div>
                                     <div className="bg-[#F8F9FB] rounded-[16px] p-5 border border-[#F3F4F6]">
                                         <p className="text-[14px] text-[#4B5563] leading-[1.6] font-medium">
-                                            {candidate.summary}
+                                            {candidate.summary || 'AI summary will be available after a search query is run against this candidate.'}
                                         </p>
                                     </div>
                                 </section>
@@ -133,10 +168,10 @@ function ProfileContent() {
                                         <h3 className="text-[13px] font-bold uppercase tracking-widest text-[#9CA3AF] mb-4">Detailed Profile</h3>
                                         <div className="space-y-4">
                                             {[
-                                                { label: 'Academic Background', value: candidate.education, icon: GraduationCap },
-                                                { label: 'Salary Expectation', value: candidate.salary, icon: DollarSign },
-                                                { label: 'Notice Period', value: candidate.noticePeriod, icon: Clock },
-                                                { label: 'Application Date', value: candidate.appliedDate, icon: FileText },
+                                                { label: 'Academic Background', value: candidate.education || 'Not provided', icon: GraduationCap },
+                                                { label: 'Salary Expectation', value: candidate.salary || 'Not specified', icon: DollarSign },
+                                                { label: 'Notice Period', value: candidate.noticePeriod || 'Not specified', icon: Clock },
+                                                { label: 'Application Date', value: candidate.appliedDate || 'Unknown', icon: FileText },
                                             ].map((item) => (
                                                 <div key={item.label} className="flex items-center gap-3 p-3 rounded-xl border border-[#F3F4F6] hover:border-[#E5E7EB] transition-colors">
                                                     <item.icon size={16} className="text-[#9CA3AF]" />
@@ -152,7 +187,7 @@ function ProfileContent() {
                                     <section>
                                         <h3 className="text-[13px] font-bold uppercase tracking-widest text-[#9CA3AF] mb-4">Core Skills</h3>
                                         <div className="flex flex-wrap gap-2">
-                                            {candidate.skills.map(skill => (
+                                            {(candidate.skills || []).map(skill => (
                                                 <span key={skill} className="px-4 py-2 bg-white border border-[#E5E7EB] text-[#374151] rounded-xl text-[13px] font-semibold hover:border-primary/30 hover:bg-blue-50/30 transition-all cursor-default">
                                                     {skill}
                                                 </span>
@@ -176,7 +211,7 @@ function ProfileContent() {
                             <div className="animate-in fade-in duration-500">
                                 <div className="relative pl-8 space-y-12 py-4">
                                     <div className="absolute left-[11px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-primary via-[#E5E7EB] to-transparent" />
-                                    {[candidate.currentCompany, ...candidate.previousCompanies].map((co, i) => (
+                                    {[candidate.currentCompany, ...(candidate.previousCompanies || [])].filter(Boolean).map((co, i) => (
                                         <div key={co} className="relative group">
                                             <div className="absolute -left-[27px] top-1.5 w-4 h-4 rounded-full border-4 border-white bg-primary shadow-sm group-hover:scale-125 transition-transform" />
                                             <div>
@@ -205,7 +240,7 @@ function ProfileContent() {
                         {activeTab === 'Skills' && (
                             <div className="space-y-6 animate-in fade-in duration-500">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                                    {candidate.skills.map((skill, i) => {
+                                    {(candidate.skills || []).map((skill, i) => {
                                         const pct = 95 - i * 8;
                                         return (
                                             <div key={skill} className="group">
@@ -226,12 +261,30 @@ function ProfileContent() {
                             </div>
                         )}
 
+                        {activeTab === 'Culture Fit' && (
+                            <div className="animate-in fade-in duration-500">
+                                <CultureFitPanel candidate={candidate} />
+                            </div>
+                        )}
+
+                        {activeTab === 'Skill Gaps' && (
+                            <div className="animate-in fade-in duration-500">
+                                <SkillGapPanel candidate={candidate} />
+                            </div>
+                        )}
+
+                        {activeTab === 'Outreach' && (
+                            <div className="animate-in fade-in duration-500">
+                                <OutreachPanel candidate={candidate} />
+                            </div>
+                        )}
+
                         {activeTab === 'Resume' && (
                             <div className="animate-in fade-in duration-500">
                                 <div className="flex items-center justify-between mb-6">
                                     <div>
                                         <h3 className="text-[15px] font-bold text-[#111827]">Curriculum Vitae</h3>
-                                        <p className="text-[12px] text-[#9CA3AF] mt-0.5">Uploaded on {candidate.appliedDate}</p>
+                                        <p className="text-[12px] text-[#9CA3AF] mt-0.5">Uploaded on {candidate.appliedDate || 'Unknown'}</p>
                                     </div>
                                     <div className="flex gap-3">
                                         <button className="btn-secondary !text-[12px] gap-2 px-4"><ExternalLink size={14} />View Full</button>
@@ -253,7 +306,7 @@ function ProfileContent() {
                         {activeTab === 'Activity' && (
                             <div className="animate-in fade-in duration-500">
                                 <div className="space-y-6">
-                                    {candidate.timeline.map((event, i) => (
+                                    {(candidate.timeline || []).map((event, i) => (
                                         <div key={i} className="flex items-start gap-4 p-4 rounded-2xl hover:bg-[#F8F9FB] transition-colors group">
                                             {timelineIcon(event.type)}
                                             <div className="flex-1 pt-1">
@@ -265,6 +318,9 @@ function ProfileContent() {
                                             </div>
                                         </div>
                                     ))}
+                                    {(!candidate.timeline || candidate.timeline.length === 0) && (
+                                        <p className="text-center text-[13px] text-[#9CA3AF] py-12">No activity recorded yet.</p>
+                                    )}
                                 </div>
                             </div>
                         )}

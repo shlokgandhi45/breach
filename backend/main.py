@@ -1,0 +1,64 @@
+"""
+main.py — FastAPI application entry point
+
+Run:
+  uvicorn main:app --reload --port 8000
+
+Docs available at:
+  http://localhost:8000/docs   (Swagger UI — great for hackathon demo)
+  http://localhost:8000/redoc
+"""
+
+import logging
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from models.schema import Base, engine
+from routes.ingest import router as ingest_router
+from routes.search import router as search_router
+from routes.intelligence import router as intelligence_router
+from routes.candidates_route import router as candidates_router
+from routes.dashboard_route import router as dashboard_router
+from routes.pipeline_route import router as pipeline_router
+
+logging.basicConfig(level=logging.INFO)
+
+app = FastAPI(
+    title       = "Unified Recruitment Platform API",
+    description = "Resume ingestion, AI-powered search, and candidate intelligence",
+    version     = "1.0.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins  = ["*"],
+    allow_methods  = ["*"],
+    allow_headers  = ["*"],
+)
+
+# Auto-create tables on startup (safe to run repeatedly — won't drop existing data)
+@app.on_event("startup")
+def startup():
+    Base.metadata.create_all(engine)
+    logging.getLogger(__name__).info("DB tables verified on startup.")
+
+# ── Register all route modules ────────────────────────────────────────────────
+app.include_router(ingest_router)         # /api/ingest/*
+app.include_router(search_router)         # /api/search/*
+app.include_router(intelligence_router)   # /api/intelligence/*
+app.include_router(candidates_router)     # /api/candidates/*
+app.include_router(dashboard_router)      # /api/dashboard/*
+app.include_router(pipeline_router)       # /api/pipeline/*
+
+@app.get("/")
+def root():
+    return {
+        "service": "Unified Recruitment Platform",
+        "docs":    "/docs",
+        "endpoints": {
+            "ingest":       "/api/ingest/status",
+            "search":       "/api/search",
+            "intelligence": "/api/intelligence/health",
+        },
+    }
+

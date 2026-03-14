@@ -1,8 +1,10 @@
 'use client';
+import { useState, useEffect } from 'react';
 import AppShell from '@/components/layout/AppShell';
 import Link from 'next/link';
-import { Mail, Users, Database, FileText, ChevronRight } from 'lucide-react';
-import { candidates } from '@/data/candidates';
+import { Mail, Users, Database, FileText, ChevronRight, Upload } from 'lucide-react';
+import { fetchCandidates } from '@/lib/candidateService';
+import ResumeUploadModal from '@/components/upload/ResumeUploadModal';
 
 const sourcingChannels = [
     {
@@ -40,12 +42,37 @@ const sourcingChannels = [
 ];
 
 export default function SourcingHubPage() {
+    const [candidates, setCandidates] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [uploadOpen, setUploadOpen] = useState(false);
+
+    useEffect(() => {
+        let cancelled = false;
+        async function load() {
+            setLoading(true);
+            const data = await fetchCandidates();
+            if (!cancelled) {
+                setCandidates(data);
+                setLoading(false);
+            }
+        }
+        load();
+        return () => { cancelled = true; };
+    }, []);
+
     return (
+        <>
         <AppShell title="Sourcing Hub" subtitle="Manage candidates across all incoming channels">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div className="flex items-center justify-between mb-4">
+                <div />
+                <button onClick={() => setUploadOpen(true)} className="btn-primary !text-[13px] flex items-center gap-2">
+                    <Upload size={14} />Upload Resumes
+                </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {sourcingChannels.map((channel) => {
                     const Icon = channel.icon;
-                    const count = candidates.filter(c => c.source === channel.source).length;
+                    const count = loading ? '—' : candidates.filter(c => c.source === channel.source).length;
 
                     return (
                         <Link
@@ -83,5 +110,7 @@ export default function SourcingHubPage() {
                 })}
             </div>
         </AppShell>
+        <ResumeUploadModal open={uploadOpen} onClose={() => setUploadOpen(false)} />
+        </>
     );
 }

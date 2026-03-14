@@ -1,31 +1,49 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import AppShell from '@/components/layout/AppShell';
 import CandidateRow from '@/components/candidates/CandidateRow';
 import CandidateCard from '@/components/candidates/CandidateCard';
 import FilterBar from '@/components/candidates/FilterBar';
-import { candidates } from '@/data/candidates';
 import { List, LayoutGrid } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+import { fetchCandidates } from '@/lib/candidateService';
 
-export default function CandidatesPage() {
+function CandidatesContent() {
     const searchParams = useSearchParams();
     const sourceParam = searchParams.get('source');
 
     const [view, setView] = useState('list');
     const [search, setSearch] = useState('');
     const [statusFilter, setStatusFilter] = useState('All');
+    const [candidates, setCandidates] = useState([]);
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        let cancelled = false;
+        async function load() {
+            setLoading(true);
+            const result = await fetchCandidates();
+            if (!cancelled) {
+                setCandidates(result);
+                setLoading(false);
+            }
+        }
+        load();
+        return () => { cancelled = true; };
+    }, []);
+
+    // Client-side filtering (works on both mock and API data)
     const filtered = candidates.filter(c => {
-        const matchSearch = c.name.toLowerCase().includes(search.toLowerCase()) ||
-            c.role.toLowerCase().includes(search.toLowerCase());
+        const matchSearch = !search ||
+            (c.name || '').toLowerCase().includes(search.toLowerCase()) ||
+            (c.role || '').toLowerCase().includes(search.toLowerCase());
         const matchStatus = statusFilter === 'All' || c.status === statusFilter;
         const matchSource = !sourceParam || c.source === sourceParam;
         return matchSearch && matchStatus && matchSource;
     });
 
     return (
-        <AppShell title="Candidates" subtitle={`${filtered.length} candidates`}>
+        <AppShell title="Candidates" subtitle={loading ? 'Loading…' : `${filtered.length} candidates`}>
             <div className="flex items-center justify-between mb-4">
                 <FilterBar
                     search={search} setSearch={setSearch}
@@ -47,7 +65,12 @@ export default function CandidatesPage() {
                 </div>
             </div>
 
-            {view === 'list' ? (
+            {loading ? (
+                <div className="section-card p-12 text-center">
+                    <div className="inline-block w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin mb-3" />
+                    <p className="text-[13px] text-[#9CA3AF]">Loading candidates…</p>
+                </div>
+            ) : view === 'list' ? (
                 <div className="section-card overflow-hidden">
                     <div className="flex items-center gap-4 px-4 py-2 border-b border-[#F3F4F6] bg-[#F8F9FB]">
                         <p className="text-[11px] font-semibold uppercase tracking-wider text-[#9CA3AF] flex-1">Candidate</p>
@@ -67,5 +90,13 @@ export default function CandidatesPage() {
                 </div>
             )}
         </AppShell>
+    );
+}
+
+export default function CandidatesPage() {
+    return (
+        <Suspense fallback={<div className="p-10 text-[#9CA3AF] text-center font-medium">Loading candidates...</div>}>
+            <CandidatesContent />
+        </Suspense>
     );
 }
